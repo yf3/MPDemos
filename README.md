@@ -1,3 +1,3 @@
 # hello-world
-Test only. \n
+Test only.
 Wow!
