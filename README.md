@@ -15,6 +15,7 @@ Sample paragraph:
 ![github logo](https://image.flaticon.com/icons/svg/25/25231.svg 'github logo')  
 This icon made by [Dave Gandy](https://www.flaticon.com/authors/dave-gandy) from [www.flaticon.com](https://www.flaticon.com/)
 
-|   table   | **col1** | **col2** |
-| **row 1** |   text   |   text   |
-| **row 2** |   text   |   text   |
+|   table   | col1 | col2 |
+|-----------|------|------|
+| **row 1** | text | text |
+| **row 2** | text | text |
