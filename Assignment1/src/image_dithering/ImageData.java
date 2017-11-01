@@ -3,12 +3,14 @@ package image_dithering;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import static org.opencv.imgcodecs.Imgcodecs.*;
+
 import java.io.File;
 
 public class ImageData {
 
     private File imageFile;
     private Mat originalImage;
+    private Mat grayscaleCopy;
 
     public ImageData() {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -24,10 +26,11 @@ public class ImageData {
 
     public void setOriginalImage() {
         try {
-            originalImage = imread(imageFile.getPath());
+            originalImage = imread(imageFile.getPath(), IMREAD_COLOR);
         }
         catch (Exception e) {
             System.err.println(e.toString());
         }
     }
+
 }

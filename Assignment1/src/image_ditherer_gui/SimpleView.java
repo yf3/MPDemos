@@ -1,6 +1,5 @@
 package image_ditherer_gui;
 
-import image_dithering.ImageData;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,7 +10,6 @@ import javafx.scene.layout.HBox;
 
 public class SimpleView {
 
-    private ImageData imageData;
 
     private Scene scene;
     private BorderPane rootLayout;
@@ -24,8 +22,7 @@ public class SimpleView {
     private ImageView originalPreview;
     private ImageView outputPreview;
 
-    public SimpleView(ImageData imageData) {
-        this.imageData = imageData;
+    public SimpleView() {
         create();
         arrange();
         adjust();
@@ -33,7 +30,7 @@ public class SimpleView {
 
     private void create() {
         rootLayout = new BorderPane();
-        scene = new Scene(rootLayout, 800, 600);
+        scene = new Scene(rootLayout);
         buttonImport = new Button("Import JPEG");
         buttonConvert = new Button("Convert to Black/White");
         buttonExport = new Button("Export Image");
@@ -51,6 +48,8 @@ public class SimpleView {
     }
 
     private void adjust() {
+        rootLayout.setMinWidth(800);
+        rootLayout.setMinHeight(600);
         panel.setAlignment(Pos.CENTER);
         previewArea.setAlignment(Pos.CENTER);
         previewArea.setMinWidth(600);
@@ -65,12 +64,8 @@ public class SimpleView {
         return buttonImport;
     }
 
-    void setOriginalPreview() {
-        originalPreview.setImage( new Image(imageData.getImageFile().toURI().toString()) );
-    }
-
-    void setOutputPreview() {
-
+    void setOriginalPreview(Image image) {
+        originalPreview.setImage(image);
     }
 
     public Scene getScene() {

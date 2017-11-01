@@ -1,5 +1,7 @@
 package image_ditherer_gui;
+
 import image_dithering.ImageData;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -32,10 +34,12 @@ public class SimpleViewController {
 
     private void importImage(File file) {
         imageData.setImageFile(file);
+        imageData.setOriginalImage();
     }
 
     private void showImagePreview() {
-        view.setOriginalPreview();
+        String imageURI = imageData.getImageFile().toURI().toString();
+        view.setOriginalPreview( new Image(imageURI) );
     }
 
 }

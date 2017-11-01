@@ -12,7 +12,7 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         ImageData imageData = new ImageData();
-        SimpleView view = new SimpleView(imageData);
+        SimpleView view = new SimpleView();
         SimpleViewController controller = new SimpleViewController(imageData, view);
         primaryStage.setTitle("Image Ditherer");
         primaryStage.setScene(view.getScene());
