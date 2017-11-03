@@ -64,8 +64,16 @@ public class SimpleView {
         return buttonImport;
     }
 
+    Button getButtonConvert() {
+        return buttonConvert;
+    }
+
     void setOriginalPreview(Image image) {
         originalPreview.setImage(image);
+    }
+
+    void setOutputPreview(Image image) {
+        outputPreview.setImage(image);
     }
 
     public Scene getScene() {

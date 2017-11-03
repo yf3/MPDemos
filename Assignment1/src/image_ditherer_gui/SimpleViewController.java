@@ -1,11 +1,12 @@
 package image_ditherer_gui;
 
-import image_dithering.ConvertingStrategy;
 import image_dithering.ImageData;
 import image_dithering.LumaGrayscaleStrategy;
+import image_dithering.OrderedDithering;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 
 public class SimpleViewController {
@@ -21,6 +22,7 @@ public class SimpleViewController {
 
     private void registerHandlers() {
         view.getButtonImport().setOnAction(event -> chooseFile());
+        view.getButtonConvert().setOnAction(event -> convertAndShow());
     }
 
     private void chooseFile() {
@@ -31,12 +33,18 @@ public class SimpleViewController {
         if (file != null) {
             importImage(file);
             showImagePreview();
+            createGrayscaleCopy();
         }
+    }
+
+    private void convertAndShow() {
+        createOutputMatrix();
+        showOutputPreview();
     }
 
     private void importImage(File file) {
         imageData.setImageFile(file);
-        imageData.setOriginalImage();
+        imageData.readOriginalImage();
     }
 
     private void showImagePreview() {
@@ -49,5 +57,14 @@ public class SimpleViewController {
         imageData.colorToGrayscale();
     }
 
+    private void createOutputMatrix() {
+        imageData.pickBinaryConverterStrategy(new OrderedDithering(OrderedDithering.BayerMatrixType.SIZE_8X8));
+        imageData.grayscaleToBinary();
+    }
+
+    private void showOutputPreview() {
+        ByteArrayInputStream imageStream = ImageData.retrieveImageStream(imageData.getOutputImage());
+        view.setOutputPreview(new Image(imageStream));
+    }
 
 }

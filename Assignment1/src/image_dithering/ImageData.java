@@ -1,9 +1,13 @@
 package image_dithering;
 
 import org.opencv.core.Core;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+
 import static org.opencv.imgcodecs.Imgcodecs.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 
 public class ImageData {
@@ -13,8 +17,8 @@ public class ImageData {
     private Mat grayscaleCopy;
     private Mat outputImage;
 
-    ConvertingStrategy grayscaleConverter;
-    ConvertingStrategy binaryImageConverter;
+    private ConvertingStrategy grayscaleConverter;
+    private ConvertingStrategy binaryImageConverter;
 
     public ImageData() {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -28,13 +32,21 @@ public class ImageData {
         this.imageFile = imageFile;
     }
 
-    public void setOriginalImage() {
+    public void readOriginalImage() {
         try {
-            originalImage = imread(imageFile.getPath(), IMREAD_COLOR);
+            originalImage = imread(imageFile.getPath(), CvType.CV_64FC3);
         }
         catch (Exception e) {
             System.err.println(e.toString());
         }
+    }
+
+    public Mat getGrayscaleCopy() {
+        return grayscaleCopy;
+    }
+
+    public Mat getOutputImage() {
+        return outputImage;
     }
 
     public void pickGrayscaleStrategy(ConvertingStrategy strategy) {
@@ -45,6 +57,22 @@ public class ImageData {
         if (grayscaleConverter != null) {
             grayscaleCopy = grayscaleConverter.retrieveResult(originalImage);
         }
+    }
+
+    public void pickBinaryConverterStrategy(ConvertingStrategy strategy) {
+        binaryImageConverter = strategy;
+    }
+
+    public void grayscaleToBinary() {
+        if (binaryImageConverter != null) {
+            outputImage = binaryImageConverter.retrieveResult(grayscaleCopy);
+        }
+    }
+
+    public static ByteArrayInputStream retrieveImageStream(Mat target) {
+        MatOfByte matOfByte = new MatOfByte();
+        imencode(".bmp", target, matOfByte);
+        return new ByteArrayInputStream(matOfByte.toArray());
     }
 
 }
