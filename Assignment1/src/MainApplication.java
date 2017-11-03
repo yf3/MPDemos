@@ -14,7 +14,7 @@ public class MainApplication extends Application {
         ImageData imageData = new ImageData();
         SimpleView view = new SimpleView();
         SimpleViewController controller = new SimpleViewController(imageData, view);
-        primaryStage.setTitle("Image Ditherer");
+        primaryStage.setTitle("Image Dithering Demo");
         primaryStage.setScene(view.getScene());
         primaryStage.show();
     }

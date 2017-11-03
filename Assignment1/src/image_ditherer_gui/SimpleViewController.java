@@ -1,6 +1,8 @@
 package image_ditherer_gui;
 
+import image_dithering.ConvertingStrategy;
 import image_dithering.ImageData;
+import image_dithering.LumaGrayscaleStrategy;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 
@@ -41,5 +43,11 @@ public class SimpleViewController {
         String imageURI = imageData.getImageFile().toURI().toString();
         view.setOriginalPreview( new Image(imageURI) );
     }
+
+    private void createGrayscaleCopy() {
+        imageData.pickGrayscaleStrategy(new LumaGrayscaleStrategy());
+        imageData.colorToGrayscale();
+    }
+
 
 }
