@@ -13,7 +13,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public class SimpleView {
 
@@ -26,7 +25,6 @@ public class SimpleView {
     private ImageView outputPreviewRight;
 
     private TilePane panel;
-    private Text description;
     private VBox outputLeftPanel;
     private VBox outputRightPanel;
     private ComboBox<String> leftStrategyChooser;
@@ -35,9 +33,6 @@ public class SimpleView {
     private HBox rightButtonSet;
 
     private Button buttonImport;
-    private Button buttonConvert;
-    private Button buttonExport;
-
     private Button leftApplyButton;
     private Button rightApplyButton;
     private Button leftExportButton;
@@ -50,7 +45,10 @@ public class SimpleView {
                 "Grayscale",
                 "Ordered Dithering 2x2",
                 "Ordered Dithering 4x4",
-                "Ordered Dithering 8x8"
+                "Ordered Dithering 8x8",
+                "Uniform Ordered Dithering 2x2",
+                "Uniform Ordered Dithering 4x4",
+                "Uniform Ordered Dithering 8x8"
         );
     }
 
@@ -64,9 +62,6 @@ public class SimpleView {
     private void create() {
         rootLayout = new BorderPane();
         scene = new Scene(rootLayout);
-        buttonImport = new Button("Import JPEG");
-//        buttonConvert = new Button("Convert to Black/White");
-//        buttonExport = new Button("Export Image");
         panel = new TilePane();
         previewArea = new TilePane();
         originalPreview = new ImageView();
@@ -78,10 +73,11 @@ public class SimpleView {
         rightStrategyChooser = new ComboBox<>();
         leftButtonSet = new HBox();
         rightButtonSet = new HBox();
-        leftApplyButton = new Button("Apply");
-        rightApplyButton = new Button("Apply");
-        leftExportButton = new Button("Export");
-        rightExportButton = new Button("Export");
+        buttonImport = new Button();
+        leftApplyButton = new Button();
+        rightApplyButton = new Button();
+        leftExportButton = new Button();
+        rightExportButton = new Button();
     }
 
     private void setContent() {
@@ -89,6 +85,11 @@ public class SimpleView {
         leftStrategyChooser.getSelectionModel().selectFirst();
         rightStrategyChooser.setItems(strategyOptions);
         rightStrategyChooser.getSelectionModel().selectFirst();
+        buttonImport.setText("Import JPEG");
+        leftApplyButton.setText("Apply");
+        rightApplyButton.setText("Apply");
+        leftExportButton.setText("Export");
+        rightExportButton.setText("Export");
     }
 
     private void arrange() {
@@ -105,7 +106,7 @@ public class SimpleView {
     }
 
     private void adjust() {
-        rootLayout.setMinWidth(1440);
+        rootLayout.setMinWidth(1280);
         rootLayout.setMinHeight(768);
         previewArea.setAlignment(Pos.CENTER);
         previewArea.setTileAlignment(Pos.CENTER);
@@ -119,13 +120,13 @@ public class SimpleView {
 
         panel.setAlignment(Pos.CENTER);
         panel.setTileAlignment(Pos.TOP_CENTER);
-        panel.setPrefTileWidth(480);
+        panel.setPrefTileWidth(360);
         panel.setPadding(new Insets(0, 0, 50, 0));
 
         outputLeftPanel.setAlignment(Pos.CENTER);
         outputRightPanel.setAlignment(Pos.CENTER);
-        outputLeftPanel.setSpacing(10.0);
-        outputRightPanel.setSpacing(10.0);
+        outputLeftPanel.setSpacing(20.0);
+        outputRightPanel.setSpacing(20.0);
 
         leftButtonSet.setAlignment(Pos.CENTER);
         rightButtonSet.setAlignment(Pos.CENTER);

@@ -22,14 +22,16 @@ public class ImageData {
 
     private static final HashMap<String, ConvertingStrategy> strategyMap = new HashMap<>();
     static {
-        strategyMap.put("Ordered Dithering 2x2", new OrderedDithering(OrderedDithering.BayerMatrixType.SIZE_2X2));
-        strategyMap.put("Ordered Dithering 4x4", new OrderedDithering(OrderedDithering.BayerMatrixType.SIZE_4X4));
-        strategyMap.put("Ordered Dithering 8x8", new OrderedDithering(OrderedDithering.BayerMatrixType.SIZE_8X8));
+        strategyMap.put("Ordered Dithering 2x2", new OrderedDithering(BayerMatrixDithering.BayerMatrixType.SIZE_2X2));
+        strategyMap.put("Ordered Dithering 4x4", new OrderedDithering(BayerMatrixDithering.BayerMatrixType.SIZE_4X4));
+        strategyMap.put("Ordered Dithering 8x8", new OrderedDithering(BayerMatrixDithering.BayerMatrixType.SIZE_8X8));
+        strategyMap.put("Uniform Ordered Dithering 2x2", new UniformSizeOrdered(BayerMatrixDithering.BayerMatrixType.SIZE_2X2));
+        strategyMap.put("Uniform Ordered Dithering 4x4", new UniformSizeOrdered(BayerMatrixDithering.BayerMatrixType.SIZE_4X4));
+        strategyMap.put("Uniform Ordered Dithering 8x8", new UniformSizeOrdered(BayerMatrixDithering.BayerMatrixType.SIZE_8X8));
     }
 
     public ImageData() {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        imageFile = null;
     }
 
     public File getImageFile() {

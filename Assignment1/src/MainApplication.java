@@ -12,8 +12,9 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         ImageData imageData = new ImageData();
+        ImageData imageDataRight = new ImageData();
         SimpleView view = new SimpleView();
-        SimpleViewController controller = new SimpleViewController(imageData, view);
+        SimpleViewController controller = new SimpleViewController(imageData, imageDataRight, view);
         primaryStage.setTitle("Image Dithering Demo");
         primaryStage.setScene(view.getScene());
         primaryStage.show();
