@@ -1,7 +1,6 @@
 package image_dithering;
 
 import org.opencv.core.Core;
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 
@@ -9,6 +8,7 @@ import static org.opencv.imgcodecs.Imgcodecs.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.util.HashMap;
 
 public class ImageData {
 
@@ -20,8 +20,16 @@ public class ImageData {
     private ConvertingStrategy grayscaleConverter;
     private ConvertingStrategy binaryImageConverter;
 
+    private static final HashMap<String, ConvertingStrategy> strategyMap = new HashMap<>();
+    static {
+        strategyMap.put("Ordered Dithering 2x2", new OrderedDithering(OrderedDithering.BayerMatrixType.SIZE_2X2));
+        strategyMap.put("Ordered Dithering 4x4", new OrderedDithering(OrderedDithering.BayerMatrixType.SIZE_4X4));
+        strategyMap.put("Ordered Dithering 8x8", new OrderedDithering(OrderedDithering.BayerMatrixType.SIZE_8X8));
+    }
+
     public ImageData() {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        imageFile = null;
     }
 
     public File getImageFile() {
@@ -33,12 +41,7 @@ public class ImageData {
     }
 
     public void readOriginalImage() {
-        try {
-            originalImage = imread(imageFile.getPath(), CvType.CV_64FC3);
-        }
-        catch (Exception e) {
-            System.err.println(e.toString());
-        }
+        originalImage = imread(imageFile.getPath());
     }
 
     public Mat getGrayscaleCopy() {
@@ -59,8 +62,8 @@ public class ImageData {
         }
     }
 
-    public void pickBinaryConverterStrategy(ConvertingStrategy strategy) {
-        binaryImageConverter = strategy;
+    public void pickBinaryConverterStrategy(String strategyName) {
+        binaryImageConverter = strategyMap.get(strategyName);
     }
 
     public void grayscaleToBinary() {
@@ -71,7 +74,7 @@ public class ImageData {
 
     public static ByteArrayInputStream retrieveImageStream(Mat target) {
         MatOfByte matOfByte = new MatOfByte();
-        imencode(".bmp", target, matOfByte);
+        imencode(".jpg", target, matOfByte);
         return new ByteArrayInputStream(matOfByte.toArray());
     }
 

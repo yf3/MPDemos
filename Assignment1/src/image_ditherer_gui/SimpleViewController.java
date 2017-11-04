@@ -5,9 +5,10 @@ import image_dithering.LumaGrayscaleStrategy;
 import image_dithering.OrderedDithering;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
+
+import static org.opencv.imgcodecs.Imgcodecs.imwrite;
 
 public class SimpleViewController {
 
@@ -22,7 +23,10 @@ public class SimpleViewController {
 
     private void registerHandlers() {
         view.getButtonImport().setOnAction(event -> chooseFile());
-        view.getButtonConvert().setOnAction(event -> convertAndShow());
+        view.getLeftApplyButton().setOnAction(event -> applyStrategyLeft());
+//        view.getRightApplyButton().setOnAction(event -> applyStrategy());
+        view.getLeftExportButton().setOnAction(event -> exportOutput());
+        view.getRightExportButton().setOnAction(event -> exportOutput());
     }
 
     private void chooseFile() {
@@ -31,15 +35,14 @@ public class SimpleViewController {
                 new FileChooser.ExtensionFilter("jpg image(jpg, jpeg)", "*.jpg", "*.jpeg", "*.JPG", "*.JPEG"));
         File file = fileChooser.showOpenDialog(view.getScene().getWindow());
         if (file != null) {
-            importImage(file);
-            showImagePreview();
+            updateOriginalImage(file);
             createGrayscaleCopy();
         }
     }
 
-    private void convertAndShow() {
-        createOutputMatrix();
-        showOutputPreview();
+    private void updateOriginalImage(File file) {
+        importImage(file);
+        showImagePreview();
     }
 
     private void importImage(File file) {
@@ -57,14 +60,28 @@ public class SimpleViewController {
         imageData.colorToGrayscale();
     }
 
+    private void applyStrategyLeft() {
+        String option = view.getLeftStrategyChooserValue();
+        if (option.equals("Grayscale")) {
+            showAppliedPreview(ImageData.retrieveImageStream(imageData.getGrayscaleCopy()));
+        }
+        else {
+            imageData.pickBinaryConverterStrategy(option);
+            createOutputMatrix();
+            showAppliedPreview(ImageData.retrieveImageStream(imageData.getOutputImage()));
+        }
+    }
+
     private void createOutputMatrix() {
-        imageData.pickBinaryConverterStrategy(new OrderedDithering(OrderedDithering.BayerMatrixType.SIZE_8X8));
         imageData.grayscaleToBinary();
     }
 
-    private void showOutputPreview() {
-        ByteArrayInputStream imageStream = ImageData.retrieveImageStream(imageData.getOutputImage());
-        view.setOutputPreview(new Image(imageStream));
+    private void showAppliedPreview(ByteArrayInputStream imageStream) {
+        view.setOutputPreviewLeft(new Image(imageStream));
+    }
+
+    private void exportOutput() {
+        imwrite("/home/francis/testExport.jpg", imageData.getOutputImage());
     }
 
 }

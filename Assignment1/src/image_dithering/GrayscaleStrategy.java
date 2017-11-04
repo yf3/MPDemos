@@ -21,9 +21,9 @@ abstract class GrayscaleStrategy implements ConvertingStrategy {
     private void fillPixels(Mat source) {
         for (int i = 0; i < result.rows(); ++i) {
             for (int j = 0; j < result.cols(); ++j) {
-                double red = source.get(i, j)[0];
+                double red = source.get(i, j)[2];
                 double green = source.get(i, j)[1];
-                double blue = source.get(i, j)[2];
+                double blue = source.get(i, j)[0];
                 double grayscaleValue = getGrayscaleValue(red, green, blue);
                 result.put(i, j, grayscaleValue);
             }

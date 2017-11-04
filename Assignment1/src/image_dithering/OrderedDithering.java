@@ -8,8 +8,10 @@ import java.util.EnumMap;
 public class OrderedDithering implements ConvertingStrategy {
 
     private int bayerMatrixLength;
-    BayerMatrixType bayerMatrixType;
+    int[][] bayerMatrix;
     Mat output;
+    private static double COLOR_WHITE = 255.0;
+    private static double COLOR_BLACK = 0;
 
     public enum BayerMatrixType {
         SIZE_2X2(2),
@@ -26,7 +28,7 @@ public class OrderedDithering implements ConvertingStrategy {
         }
     }
 
-    static class BayerMatrix {
+    static class BayerMatrixData {
         static EnumMap<BayerMatrixType, int[][]> standardBayer = new EnumMap<>(BayerMatrixType.class);
         final static int[][] STANDARD_2X2 = {{0, 2}, {3, 1}};
         final static int[][] STANDARD_4X4 = {{0, 8, 2, 10}, {12, 4, 14, 6}, {3, 11, 1, 9}, {15, 7, 13, 5}};
@@ -39,7 +41,7 @@ public class OrderedDithering implements ConvertingStrategy {
                 {51, 19, 59, 27, 49, 17, 57, 25},
                 {15, 47, 7, 39, 13, 45, 5, 37},
                 {63, 31, 55, 23, 61, 29, 53, 21} };
-        //        final static int MAX_LENGTH = BayerMatrixType.SIZE_8X8.getLength();
+
         static {
             standardBayer.put(BayerMatrixType.SIZE_2X2, STANDARD_2X2);
             standardBayer.put(BayerMatrixType.SIZE_4X4, STANDARD_4X4);
@@ -49,7 +51,7 @@ public class OrderedDithering implements ConvertingStrategy {
 
     public OrderedDithering(BayerMatrixType bayerMatrixType) {
         bayerMatrixLength = bayerMatrixType.getLength();
-        this.bayerMatrixType = bayerMatrixType;
+        bayerMatrix = BayerMatrixData.standardBayer.get(bayerMatrixType);
     }
 
     @Override
@@ -59,27 +61,26 @@ public class OrderedDithering implements ConvertingStrategy {
         return output;
     }
 
+    private void initializeOutput(Mat source) {
+        output = new Mat(source.rows() * bayerMatrixLength, source.cols() * bayerMatrixLength, CvType.CV_8UC1);
+    }
+
     private void fillPixels(Mat source) {
         int maxLevel = bayerMatrixLength * bayerMatrixLength + 1;
-        double levelRange = 0xff / maxLevel;
+        double levelRange = COLOR_WHITE / maxLevel;
 
         for (int i = 0; i < output.rows(); i += bayerMatrixLength) {
             for (int j = 0; j < output.cols(); j += bayerMatrixLength) {
                 for (int a = 0; a < bayerMatrixLength; ++a) {
                     for (int b = 0; b < bayerMatrixLength; ++b) {
-                        double level_value = levelRange * (BayerMatrix.standardBayer.get(bayerMatrixType)[a][b] + 1);
+                        double level_value = levelRange * bayerMatrix[a][b] + 1;
                         double grayscaleValue = source.get(i / bayerMatrixLength, j / bayerMatrixLength)[0];
-                        double result = (grayscaleValue > level_value) ? 0xff : 0;
+                        double result = (grayscaleValue > level_value) ? COLOR_WHITE : COLOR_BLACK;
                         output.put(i + a, j + b, result);
                     }
                 }
             }
         }
-    }
-
-
-    private void initializeOutput(Mat source) {
-        output = new Mat(source.rows() * bayerMatrixLength, source.cols() * bayerMatrixLength, CvType.CV_8UC1);
     }
 
 }
