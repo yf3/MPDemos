@@ -22,6 +22,7 @@ public class ImageData {
 
     public static final LinkedHashMap<String, ConvertingStrategy> strategyMap = new LinkedHashMap<>();
     static {
+        strategyMap.put("Grayscale (Luma)", new LumaGrayscaleStrategy());
         strategyMap.put("Ordered Dithering 2x2", new OrderedDithering(BayerMatrixDithering.BayerMatrixType.SIZE_2X2));
         strategyMap.put("Ordered Dithering 4x4", new OrderedDithering(BayerMatrixDithering.BayerMatrixType.SIZE_4X4));
         strategyMap.put("Ordered Dithering 8x8", new OrderedDithering(BayerMatrixDithering.BayerMatrixType.SIZE_8X8));

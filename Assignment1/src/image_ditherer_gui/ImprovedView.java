@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -20,12 +21,13 @@ public class ImprovedView {
     private BorderPane originalCell;
     private ImageView originalImageView;
     private VBox originalPanel;
+    private Label panelTitle;
     private Button buttonImport;
     private ObservableList<ConvertedCellUnit> convertedCells;
 
     private static final int CELL_AMOUNT = 2;
     private static final int INIT_ROOT_LAYOUT_WIDTH = 1280;
-    private static final int INIT_ROOT_LAYOUT_HEIGHT = 768;
+    private static final int INIT_ROOT_LAYOUT_HEIGHT = 600;
     private static final int CELL_WIDTH = 360;
 
     public ImprovedView() {
@@ -39,6 +41,7 @@ public class ImprovedView {
         originalCell = new BorderPane();
         originalImageView = new ImageView();
         originalPanel = new VBox();
+        panelTitle = new Label();
         buttonImport = new Button();
         cellWrapper = new TilePane();
         convertedCells = FXCollections.observableArrayList();
@@ -53,14 +56,15 @@ public class ImprovedView {
         cellWrapper.setTileAlignment(Pos.CENTER);
         cellWrapper.setPrefTileWidth(CELL_WIDTH);
         cellWrapper.prefHeightProperty().bind(rootLayout.heightProperty());
-        cellWrapper.setHgap(10.0);
+        cellWrapper.setHgap(20.0);
 
         originalCell.prefWidthProperty().bind(cellWrapper.tileWidthProperty());
         originalCell.prefHeightProperty().bind(cellWrapper.heightProperty());
+        originalCell.setPadding(new Insets(100, 0, 50, 0));
+
         originalImageView.setPreserveRatio(true);
         originalImageView.fitWidthProperty().bind(originalCell.widthProperty());
         originalPanel.setAlignment(Pos.CENTER);
-        originalPanel.setPadding(new Insets(0, 0, 50, 0));
         originalPanel.setSpacing(20.0);
     }
 
@@ -79,10 +83,11 @@ public class ImprovedView {
         for (ConvertedCellUnit unit : convertedCells) {
             cellWrapper.getChildren().add(unit.getBasePane());
         }
-        originalCell.setCenter(originalImageView);
+
+        originalCell.setTop(originalImageView);
         originalCell.setBottom(originalPanel);
 
-        originalPanel.getChildren().add(buttonImport);
+        originalPanel.getChildren().addAll(buttonImport);
     }
 
     void setOriginalPreview(Image image) {
