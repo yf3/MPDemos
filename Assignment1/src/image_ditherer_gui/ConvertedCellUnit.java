@@ -17,10 +17,12 @@ class ConvertedCellUnit {
     private BorderPane basePane;
     private ImageView imageView;
     private VBox panel;
-    ComboBox<String> strategyChooser;
+    private ComboBox<String> strategyChooser;
+    private HBox bar;
+    private Button buttonApply;
     private Button buttonExport;
 
-    ConvertedCellUnit(ReadOnlyDoubleProperty wrapperWidthProperty, ReadOnlyDoubleProperty wrapperHeightProperty) {
+    ConvertedCellUnit(ReadOnlyDoubleProperty tileWidthProperty, ReadOnlyDoubleProperty wrapperHeightProperty) {
         basePane = new BorderPane();
         imageView = new ImageView();
         panel = new VBox();
@@ -28,17 +30,24 @@ class ConvertedCellUnit {
         for (String strategyName : ImageData.strategyMap.keySet()) {
             strategyChooser.getItems().add(strategyName);
         }
+        bar = new HBox();
+        buttonApply = new Button("Apply");
         buttonExport = new Button("Export");
 
-        panel.getChildren().addAll(strategyChooser, buttonExport);
+        bar.getChildren().addAll(buttonApply, buttonExport);
+        panel.getChildren().addAll(strategyChooser, bar);
         basePane.setCenter(imageView);
         basePane.setBottom(panel);
 
-        panel.setAlignment(Pos.CENTER);
-        basePane.prefWidthProperty().bind(wrapperWidthProperty);
+        basePane.prefWidthProperty().bind(tileWidthProperty);
         basePane.prefHeightProperty().bind(wrapperHeightProperty);
+        imageView.setPreserveRatio(true);
+        imageView.fitWidthProperty().bind(tileWidthProperty);
+        panel.setAlignment(Pos.CENTER);
         panel.setPadding(new Insets(0, 0, 50, 0));
         panel.setSpacing(20.0);
+        bar.setAlignment(Pos.CENTER);
+        bar.setSpacing(10.0);
     }
 
     void setImageView(Image image) {
@@ -49,7 +58,15 @@ class ConvertedCellUnit {
         return basePane;
     }
 
+    Button getButtonApply() {
+        return buttonApply;
+    }
+
     Button getButtonExport() {
         return buttonExport;
+    }
+
+    String getStrtegyChooserValue() {
+        return strategyChooser.getValue();
     }
 }

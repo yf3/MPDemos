@@ -73,7 +73,7 @@ public class SimpleViewController {
         else {
             imageDataLeft.pickBinaryConverterStrategy(option);
             createOutputMatrix(imageDataLeft);
-            showAppliedPreviewLeft(ImageData.retrieveImageStream(imageDataLeft.getOutputImage()));
+            showAppliedPreviewLeft(ImageData.retrieveImageStream(imageDataLeft.getOutputMatrix()));
         }
     }
 
@@ -85,7 +85,7 @@ public class SimpleViewController {
         else {
             imageDataRight.pickBinaryConverterStrategy(option);
             createOutputMatrix(imageDataRight);
-            showAppliedPreviewRight(ImageData.retrieveImageStream(imageDataRight.getOutputImage()));
+            showAppliedPreviewRight(ImageData.retrieveImageStream(imageDataRight.getOutputMatrix()));
         }
     }
 
@@ -111,7 +111,7 @@ public class SimpleViewController {
                 imwrite(savedFile.getPath(), imageDataLeft.getGrayscaleCopy());
             }
             else {
-                imwrite(savedFile.getPath(), imageDataLeft.getOutputImage());
+                imwrite(savedFile.getPath(), imageDataLeft.getOutputMatrix());
             }
         }
     }
@@ -126,7 +126,7 @@ public class SimpleViewController {
                 imwrite(savedFile.getPath(), imageDataRight.getGrayscaleCopy());
             }
             else {
-                imwrite(savedFile.getPath(), imageDataRight.getOutputImage());
+                imwrite(savedFile.getPath(), imageDataRight.getOutputMatrix());
             }
         }
     }

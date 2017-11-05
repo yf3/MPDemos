@@ -22,6 +22,7 @@ public class MainApplication extends Application {
             imageDataContainer.add(new ImageData());
         }
         ImprovedView view = new ImprovedView();
+        ImprovedViewController controller= new ImprovedViewController(imageDataContainer, view);
 //        ImageData imageData = new ImageData();
 //        ImageData imageDataRight = new ImageData();
 //        SimpleView view = new SimpleView();

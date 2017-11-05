@@ -54,7 +54,7 @@ public class ImageData {
         return grayscaleCopy;
     }
 
-    public Mat getOutputImage() {
+    public Mat getOutputMatrix() {
         return outputImage;
     }
 
