@@ -8,8 +8,8 @@ abstract class BayerMatrixDithering implements ConvertingStrategy {
 
     final int bayerMatrixLength;
     final int[][] bayerMatrix;
-    static double COLOR_WHITE = 255.0;
-    static double COLOR_BLACK = 0;
+    static final double COLOR_WHITE = 255.0;
+    static final double COLOR_BLACK = 0;
 
     public enum BayerMatrixType {
         SIZE_2X2(2),
