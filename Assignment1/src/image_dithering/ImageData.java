@@ -29,15 +29,13 @@ public class ImageData {
         strategyMap.put("Uniform Ordered Dithering 2x2", new UniformSizeOrdered(BayerMatrixDithering.BayerMatrixType.SIZE_2X2));
         strategyMap.put("Uniform Ordered Dithering 4x4", new UniformSizeOrdered(BayerMatrixDithering.BayerMatrixType.SIZE_4X4));
         strategyMap.put("Uniform Ordered Dithering 8x8", new UniformSizeOrdered(BayerMatrixDithering.BayerMatrixType.SIZE_8X8));
+        strategyMap.put("Floyd-Steinberg Dithering", new FloydSteinbergDithering());
     }
 
     public ImageData() {
 
     }
 
-//    public static LinkedHashMap<String, ConvertingStrategy> getStrategyMap() {
-//        return strategyMap;
-//    }
 
     public File getImageFile() {
         return imageFile;

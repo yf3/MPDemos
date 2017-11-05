@@ -27,7 +27,7 @@ public class ImprovedView {
 
     private static final int CELL_AMOUNT = 2;
     private static final int INIT_ROOT_LAYOUT_WIDTH = 1280;
-    private static final int INIT_ROOT_LAYOUT_HEIGHT = 600;
+    private static final int INIT_ROOT_LAYOUT_HEIGHT = 640;
     private static final int CELL_WIDTH = 360;
 
     public ImprovedView() {
