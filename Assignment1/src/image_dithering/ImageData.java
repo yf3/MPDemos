@@ -8,7 +8,7 @@ import static org.opencv.imgcodecs.Imgcodecs.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class ImageData {
 
@@ -20,7 +20,7 @@ public class ImageData {
     private ConvertingStrategy grayscaleConverter;
     private ConvertingStrategy binaryImageConverter;
 
-    private static final HashMap<String, ConvertingStrategy> strategyMap = new HashMap<>();
+    public static final LinkedHashMap<String, ConvertingStrategy> strategyMap = new LinkedHashMap<>();
     static {
         strategyMap.put("Ordered Dithering 2x2", new OrderedDithering(BayerMatrixDithering.BayerMatrixType.SIZE_2X2));
         strategyMap.put("Ordered Dithering 4x4", new OrderedDithering(BayerMatrixDithering.BayerMatrixType.SIZE_4X4));
@@ -31,8 +31,12 @@ public class ImageData {
     }
 
     public ImageData() {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
     }
+
+//    public static LinkedHashMap<String, ConvertingStrategy> getStrategyMap() {
+//        return strategyMap;
+//    }
 
     public File getImageFile() {
         return imageFile;

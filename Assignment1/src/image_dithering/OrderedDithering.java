@@ -18,7 +18,6 @@ public class OrderedDithering extends BayerMatrixDithering {
     protected void fillPixels(Mat source, Mat output) {
         int maxLevel = bayerMatrixLength * bayerMatrixLength + 1;
         double levelRange = COLOR_WHITE / maxLevel;
-
         for (int i = 0; i < output.rows(); i += bayerMatrixLength) {
             for (int j = 0; j < output.cols(); j += bayerMatrixLength) {
                 for (int a = 0; a < bayerMatrixLength; ++a) {
