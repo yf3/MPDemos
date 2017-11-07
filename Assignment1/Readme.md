@@ -48,7 +48,7 @@ __Fig.8__ Floyd-Steinberg dithering vs Ordered dithering with 4x4
 
 ## Known Issues
 
-+ The result of Floyd-Steinberg dithering shown above actually use a weird standard to distinguish black and white color: by using value 240 as a separator instead of 128. But it gets far better result than using 128.
++ The result of Floyd-Steinberg dithering shown here actually use a weird standard to distinguish black and white color: by using value 240 as a separator instead of 128. But the result is surprisingly great.
 + Image showed in javafx "ImageView" class sometimes looks different from the real result. To see the accurate result, use the export button to see the image file.
 + Very large pictures sometimes cannot be loaded properly.
 
@@ -56,4 +56,4 @@ __Fig.8__ Floyd-Steinberg dithering vs Ordered dithering with 4x4
 
 + Setting up the opencv developing environment for Java language and Java IDEs.
 + Understand multiple color-to-grayscale and dithering algorithms and how to implement them.
-+ Getting more familiar with basic git instructions.
++ Getting more familiar with basic git commands.
