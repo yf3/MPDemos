@@ -11,7 +11,7 @@ public class Main {
         NotationInterpreter notationInterpreter = new NotationInterpreter();
         try {
             soundDataGenerator.buildData(notationInterpreter.retrieveNoteList(test));
-            soundDataGenerator.produceWAV();
+            soundDataGenerator.produceWAV("./out/test.wav");
         }
         catch (IOException e) {
             e.printStackTrace();

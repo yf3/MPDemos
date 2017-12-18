@@ -50,12 +50,12 @@ public class SoundDataGenerator {
         return noteData;
     }
 
-    public void produceWAV() throws IOException {
+    public void produceWAV(String outputPath) throws IOException {
         AudioFormat format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, SAMPLE_FREQUENCY,
                 BYTES_PER_FRAME * 8,1, BYTES_PER_FRAME, SAMPLE_FREQUENCY, false);
         ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
         AudioInputStream ais = new AudioInputStream(inputStream, format, data.length/format.getFrameSize());
-        AudioSystem.write(ais, AudioFileFormat.Type.WAVE, new File("test.wav"));
+        AudioSystem.write(ais, AudioFileFormat.Type.WAVE, new File(outputPath));
     }
     
 }
