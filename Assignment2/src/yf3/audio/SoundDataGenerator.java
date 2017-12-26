@@ -1,9 +1,6 @@
 package yf3.audio;
 
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -70,6 +67,28 @@ public class SoundDataGenerator {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
         AudioInputStream ais = new AudioInputStream(inputStream, format, data.length/format.getFrameSize());
         AudioSystem.write(ais, AudioFileFormat.Type.WAVE, new File(outputPath));
+    }
+
+    public void playDataByClip(byte[] audioData) {
+        AudioFormat format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, SAMPLE_FREQUENCY,
+                BYTES_PER_FRAME * 8,1, BYTES_PER_FRAME, SAMPLE_FREQUENCY, false);
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(audioData);
+        AudioInputStream ais = new AudioInputStream(inputStream, format, data.length/format.getFrameSize());
+        Clip clip = null;
+        try {
+            clip = AudioSystem.getClip();
+            clip.open(ais);
+            clip.start();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            if (clip != null) {
+                clip.stop();
+                clip.close();
+            }
+        }
     }
     
 }

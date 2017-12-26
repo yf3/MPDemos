@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppViewController">
+   <left>
+      <VBox alignment="TOP_CENTER" prefWidth="700.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="210.0">
+               <children>
+                  <Group>
+                     <children>
+                        <Rectangle id="C" fx:id="cKey" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" onMouseClicked="#onKeyClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" BorderPane.alignment="CENTER" />
+                        <Rectangle id="D" fx:id="dKey" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" layoutX="50.0" onMouseClicked="#onKeyClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle id="E" fx:id="eKey" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" layoutX="100.0" onMouseClicked="#onKeyClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle id="F" fx:id="fKey" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" layoutX="150.0" onMouseClicked="#onKeyClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle id="G" fx:id="gKey" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" layoutX="200.0" onMouseClicked="#onKeyClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle id="A" fx:id="aKey" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" layoutX="250.0" onMouseClicked="#onKeyClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle id="B" fx:id="bKey" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" layoutX="300.0" onMouseClicked="#onKeyClicked" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle id="C#" fx:id="cSharpKey" arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="40.0" onMouseClicked="#onKeyClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle id="D#" fx:id="dSharpKey" arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="90.0" onMouseClicked="#onKeyClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle id="F#" fx:id="fSharpKey" arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="190.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle id="G#" fx:id="gSharpKey" arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="240.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle id="A#" fx:id="aSharpKey" arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="290.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+                     </HBox.margin>
+                  </Group>
+                  <VBox alignment="CENTER" prefHeight="210.0" prefWidth="250.0" spacing="20.0">
+                     <children>
+                        <ChoiceBox fx:id="pitchLevelChooser" prefWidth="150.0" />
+                        <Button fx:id="addRestBtn" mnemonicParsing="false" prefWidth="150.0" text="Add A Rest" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Label fx:id="trackContent" alignment="TOP_LEFT" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, rgba(255,255,247,1) 0%,rgba(255,255,226,1) 100%); -fx-border-color: black;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER_RIGHT" prefWidth="300.0" spacing="30.0">
+               <children>
+                  <ChoiceBox fx:id="trackChooser" prefWidth="100.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ChoiceBox>
+                  <Button fx:id="saveTrackBtn" mnemonicParsing="false" text="Save" />
+               </children>
+               <padding>
+                  <Insets right="50.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
