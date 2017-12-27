@@ -108,12 +108,12 @@
                         </Label>
                         <HBox alignment="TOP_CENTER" spacing="10.0">
                            <children>
-                              <Button fx:id="playTrack1Btn" disable="true" mnemonicParsing="false" text="Play">
+                              <Button fx:id="playTrackOneBtn" disable="true" mnemonicParsing="false" onMouseClicked="#onPlayTrackOneClicked" text="Play">
                                  <font>
                                     <Font name="Ubuntu Light" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="showTrack1Btn" disable="true" mnemonicParsing="false" text="Show Content">
+                              <Button fx:id="showTrackOneBtn" disable="true" mnemonicParsing="false" text="Show Content">
                                  <font>
                                     <Font name="Ubuntu Light" size="14.0" />
                                  </font>
@@ -134,12 +134,12 @@
                         </Label>
                         <HBox alignment="TOP_CENTER" spacing="10.0">
                            <children>
-                              <Button fx:id="playTrack2Btn" disable="true" mnemonicParsing="false" text="Play">
+                              <Button fx:id="playTrackTwoBtn" disable="true" mnemonicParsing="false" onMouseClicked="#onPlayTrackTwoClicked" text="Play">
                                  <font>
                                     <Font name="Ubuntu Light" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="showTrack2Btn" disable="true" mnemonicParsing="false" text="Show Content">
+                              <Button fx:id="showTrackTwoBtn" disable="true" mnemonicParsing="false" text="Show Content">
                                  <font>
                                     <Font name="Ubuntu Light" size="14.0" />
                                  </font>
@@ -187,7 +187,7 @@
                         <Font name="Ubuntu Light" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="delayInputField" alignment="CENTER" prefHeight="20.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent;" text="0">
+                  <TextField fx:id="delayInputField" alignment="CENTER" prefHeight="20.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent;">
                      <font>
                         <Font name="Ubuntu Light" size="14.0" />
                      </font>

@@ -23,9 +23,9 @@ public class AudioManager {
         audioByteData = new AudioByteData(audioData);
     }
 
-    public void dataToWav() {
+    public void dataToWav(String outputPath) {
         try {
-            audioByteData.produceWAV("./out/test.wav");
+            audioByteData.produceWAV(outputPath);
         }
         catch (IOException e) {
             e.printStackTrace();

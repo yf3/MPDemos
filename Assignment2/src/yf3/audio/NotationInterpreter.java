@@ -36,8 +36,8 @@ public class NotationInterpreter {
         FREQUENCY_MAP.put("B.4", 494);
     }
 
-    public static ArrayList<Note> retrieveNoteList(String input) {
-        ArrayList<String> noteTokenList = new ArrayList<>(Arrays.asList(input.split("\\s+")));
+    static ArrayList<Note> retrieveNoteList(String input) {
+        ArrayList<String> noteTokenList = new ArrayList<>(Arrays.asList(input.trim().split("\\s+")));
         ArrayList<Note> noteDataList = new ArrayList<>();
         buildDataFromTokens(noteTokenList, noteDataList);
         return noteDataList;
@@ -49,7 +49,7 @@ public class NotationInterpreter {
         }
     }
 
-    public static Note createNoteDataFromToken(String token) {
+    private static Note createNoteDataFromToken(String token) {
         if (token.charAt(0) == 'R') {
             return new Note(1, 0);
         }
