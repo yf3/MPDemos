@@ -19,6 +19,8 @@ public class AppViewController {
     @FXML
     private ChoiceBox<String> delayedTrackChooser;
     @FXML
+    private ChoiceBox<Integer> fourierFrequencyChooser;
+    @FXML
     private TextArea trackContent;
     @FXML
     private TextField delayInputField;
@@ -44,6 +46,9 @@ public class AppViewController {
 
         delayedTrackChooser.setItems(trackList);
         delayedTrackChooser.getSelectionModel().selectLast();
+
+        fourierFrequencyChooser.setItems(FXCollections.observableArrayList(0, 100, 200, 500, 800));
+        fourierFrequencyChooser.getSelectionModel().selectFirst();
     }
 
     @FXML
@@ -64,7 +69,10 @@ public class AppViewController {
 
     @FXML
     public void onDeleteClicked() {
-        trackContent.setText(trackContent.getText().substring(0, trackContent.getText().lastIndexOf(TOKEN_SEPARATOR)));
+        String currentText = trackContent.getText();
+        if (!currentText.isEmpty()) {
+            trackContent.setText(currentText.substring(0, currentText.lastIndexOf(TOKEN_SEPARATOR)));
+        }
     }
 
     @FXML

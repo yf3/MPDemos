@@ -36,14 +36,14 @@ public class NotationInterpreter {
         FREQUENCY_MAP.put("B.4", 494);
     }
 
-    public ArrayList<Note> retrieveNoteList(String input) {
+    public static ArrayList<Note> retrieveNoteList(String input) {
         ArrayList<String> noteTokenList = new ArrayList<>(Arrays.asList(input.split("\\s+")));
         ArrayList<Note> noteDataList = new ArrayList<>();
         buildDataFromTokens(noteTokenList, noteDataList);
         return noteDataList;
     }
 
-    private void buildDataFromTokens(ArrayList<String> noteTokenList, ArrayList<Note> noteDataList) {
+    private static void buildDataFromTokens(ArrayList<String> noteTokenList, ArrayList<Note> noteDataList) {
         for (String aNoteTokenList : noteTokenList) {
             noteDataList.add(createNoteDataFromToken(aNoteTokenList));
         }

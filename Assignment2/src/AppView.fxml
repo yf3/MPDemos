@@ -69,7 +69,7 @@
                         <Font name="Ubuntu" size="16.0" />
                      </font>
                   </Label>
-                  <ChoiceBox prefWidth="100.0" style="-fx-background-radius: 10;">
+                  <ChoiceBox fx:id="fourierFrequencyChooser" prefWidth="100.0" style="-fx-background-radius: 10;">
                      <HBox.margin>
                         <Insets left="10.0" right="30.0" />
                      </HBox.margin>
