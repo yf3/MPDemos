@@ -67,6 +67,7 @@ public class AudioByteData {
     }
 
     void addDelayInFront(int delaySeconds) throws IOException {
+        if (delaySeconds == 0) return;
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         int delaySize = BYTES_PER_FRAME * delaySeconds * SAMPLE_FREQUENCY;
         byte[] delay = new byte[delaySize];
