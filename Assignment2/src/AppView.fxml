@@ -37,8 +37,18 @@
                   </Group>
                   <VBox alignment="CENTER" prefHeight="210.0" prefWidth="250.0" spacing="20.0">
                      <children>
+                        <Label text="Choose Pitch Level:">
+                           <font>
+                              <Font name="Ubuntu Light" size="16.0" />
+                           </font>
+                        </Label>
                         <ChoiceBox fx:id="pitchLevelChooser" prefWidth="150.0" style="-fx-background-radius: 10;" />
-                        <Button fx:id="addRestBtn" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-radius: 20;" text="Add A Rest">
+                        <Button fx:id="addRestBtn" mnemonicParsing="false" onMouseClicked="#onAddRestClicked" prefWidth="150.0" style="-fx-background-radius: 20;" text="Add A Rest">
+                           <font>
+                              <Font name="Ubuntu Light" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="60.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#onDeleteClicked" prefWidth="150.0" style="-fx-background-radius: 20;" text="Delete Last Note">
                            <font>
                               <Font name="Ubuntu Light" size="14.0" />
                            </font>
@@ -74,7 +84,7 @@
                         <Insets left="10.0" right="30.0" />
                      </HBox.margin>
                   </ChoiceBox>
-                  <Button fx:id="saveTrackBtn" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-radius: 20;" text="Save">
+                  <Button fx:id="saveTrackBtn" mnemonicParsing="false" onMouseClicked="#onSaveClicked" prefWidth="80.0" style="-fx-background-radius: 20;" text="Save">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -98,12 +108,12 @@
                         </Label>
                         <HBox alignment="TOP_CENTER" spacing="10.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Play">
+                              <Button fx:id="playTrack1Btn" disable="true" mnemonicParsing="false" text="Play">
                                  <font>
                                     <Font name="Ubuntu Light" size="14.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" text="Show Content">
+                              <Button fx:id="showTrack1Btn" disable="true" mnemonicParsing="false" text="Show Content">
                                  <font>
                                     <Font name="Ubuntu Light" size="14.0" />
                                  </font>
@@ -124,12 +134,12 @@
                         </Label>
                         <HBox alignment="TOP_CENTER" spacing="10.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Play">
+                              <Button fx:id="playTrack2Btn" disable="true" mnemonicParsing="false" text="Play">
                                  <font>
                                     <Font name="Ubuntu Light" size="14.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" text="Show Content">
+                              <Button fx:id="showTrack2Btn" disable="true" mnemonicParsing="false" text="Show Content">
                                  <font>
                                     <Font name="Ubuntu Light" size="14.0" />
                                  </font>
@@ -150,7 +160,7 @@
       </VBox>
    </left>
    <right>
-      <VBox alignment="TOP_CENTER" prefWidth="324.0" style="-fx-background-color: rgba(0,0,0,a);" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefWidth="324.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Play Two Parts Together:">
                <VBox.margin>
@@ -167,7 +177,7 @@
                         <Font name="Ubuntu Light" size="16.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="trackChooser1" prefWidth="100.0" style="-fx-background-radius: 10;" />
+                  <ChoiceBox fx:id="delayedTrackChooser" prefWidth="100.0" style="-fx-background-radius: 10;" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0">
@@ -177,9 +187,9 @@
                         <Font name="Ubuntu Light" size="16.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" prefHeight="20.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent;" text="0">
+                  <TextField fx:id="delayInputField" alignment="CENTER" prefHeight="20.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent;" text="0">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Ubuntu Light" size="14.0" />
                      </font>
                   </TextField>
                   <Label text="seconds">
@@ -189,7 +199,7 @@
                   </Label>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" text="Play">
+            <Button fx:id="playTogetherBtn" disable="true" mnemonicParsing="false" text="Play">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>

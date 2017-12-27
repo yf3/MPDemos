@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class NotationInterpreter {
 
-    private static final HashMap<String, Integer> FREQUENCY_MAP = new HashMap<>();
+    public static final HashMap<String, Integer> FREQUENCY_MAP = new HashMap<>();
     private static final int DEFAULT_AMPLITUDE = 10000;
 
     static {
@@ -49,7 +49,7 @@ public class NotationInterpreter {
         }
     }
 
-    private Note createNoteDataFromToken(String token) {
+    public static Note createNoteDataFromToken(String token) {
         if (token.charAt(0) == 'R') {
             return new Note(1, 0);
         }
