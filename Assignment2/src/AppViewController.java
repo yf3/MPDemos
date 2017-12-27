@@ -2,17 +2,18 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 
 public class AppViewController {
 
-    public static final String TOKEN_SEPARATOR = " ";
+    private static final String TOKEN_SEPARATOR = " ";
     public static final int MAX_TRACK_LENGTH = 30;
     private int currentTrackLength;
 
     @FXML
-    private Label trackContent;
+    private TextArea trackContent;
     @FXML
     private Rectangle cKey;
     @FXML
@@ -40,7 +41,6 @@ public class AppViewController {
         trackChooser.setItems(FXCollections.observableArrayList("Track1", "Track2"));
         trackChooser.getSelectionModel().selectFirst();
 
-        trackContent.setWrapText(true);
     }
 
     @FXML

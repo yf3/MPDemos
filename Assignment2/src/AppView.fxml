@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppViewController">
    <left>
       <VBox alignment="TOP_CENTER" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
@@ -32,42 +32,177 @@
                         <Rectangle id="A#" fx:id="aSharpKey" arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="290.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
                      </children>
                      <HBox.margin>
-                        <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+                        <Insets bottom="30.0" left="50.0" right="50.0" top="50.0" />
                      </HBox.margin>
                   </Group>
                   <VBox alignment="CENTER" prefHeight="210.0" prefWidth="250.0" spacing="20.0">
                      <children>
-                        <ChoiceBox fx:id="pitchLevelChooser" prefWidth="150.0" />
-                        <Button fx:id="addRestBtn" mnemonicParsing="false" prefWidth="150.0" text="Add A Rest" />
+                        <ChoiceBox fx:id="pitchLevelChooser" prefWidth="150.0" style="-fx-background-radius: 10;" />
+                        <Button fx:id="addRestBtn" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-radius: 20;" text="Add A Rest">
+                           <font>
+                              <Font name="Ubuntu Light" size="14.0" />
+                           </font>
+                        </Button>
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <Label fx:id="trackContent" alignment="TOP_LEFT" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, rgba(255,255,247,1) 0%,rgba(255,255,226,1) 100%); -fx-border-color: black;">
+            <TextArea fx:id="trackContent" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="600.0" wrapText="true">
                <font>
                   <Font size="18.0" />
                </font>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Label>
-            <HBox alignment="CENTER_RIGHT" prefWidth="300.0" spacing="30.0">
+            </TextArea>
+            <HBox alignment="CENTER_RIGHT" prefWidth="300.0">
                <children>
-                  <ChoiceBox fx:id="trackChooser" prefWidth="100.0">
+                  <Label text="Fourier Transform:">
+                     <font>
+                        <Font name="Ubuntu" size="16.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox prefWidth="100.0" style="-fx-background-radius: 10;">
                      <HBox.margin>
-                        <Insets />
+                        <Insets left="10.0" right="30.0" />
                      </HBox.margin>
                   </ChoiceBox>
-                  <Button fx:id="saveTrackBtn" mnemonicParsing="false" text="Save" />
+                  <Label text="Select Track:">
+                     <font>
+                        <Font name="Ubuntu Light" size="16.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="trackChooser" prefWidth="100.0" style="-fx-background-radius: 10;">
+                     <HBox.margin>
+                        <Insets left="10.0" right="30.0" />
+                     </HBox.margin>
+                  </ChoiceBox>
+                  <Button fx:id="saveTrackBtn" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-radius: 20;" text="Save">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
                </children>
                <padding>
                   <Insets right="50.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefWidth="700.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefWidth="350.0" spacing="10.0">
+                     <children>
+                        <Label text="Track1">
+                           <font>
+                              <Font name="Ubuntu Light" size="16.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="TOP_CENTER" spacing="10.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Play">
+                                 <font>
+                                    <Font name="Ubuntu Light" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" text="Show Content">
+                                 <font>
+                                    <Font name="Ubuntu Light" size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets top="30.0" />
+                     </padding>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefWidth="350.0" spacing="10.0">
+                     <children>
+                        <Label text="Track2">
+                           <font>
+                              <Font name="Ubuntu Light" size="16.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="TOP_CENTER" spacing="10.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Play">
+                                 <font>
+                                    <Font name="Ubuntu Light" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" text="Show Content">
+                                 <font>
+                                    <Font name="Ubuntu Light" size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets top="30.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets top="20.0" />
                </padding>
             </HBox>
          </children>
       </VBox>
    </left>
+   <right>
+      <VBox alignment="TOP_CENTER" prefWidth="324.0" style="-fx-background-color: rgba(0,0,0,a);" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Play Two Parts Together:">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Ubuntu Light" size="20.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="50.0" spacing="10.0">
+               <children>
+                  <Label text="Set Delay on:">
+                     <font>
+                        <Font name="Ubuntu Light" size="16.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="trackChooser1" prefWidth="100.0" style="-fx-background-radius: 10;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0">
+               <children>
+                  <Label text="for:">
+                     <font>
+                        <Font name="Ubuntu Light" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField alignment="CENTER" prefHeight="20.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent;" text="0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Label text="seconds">
+                     <font>
+                        <Font name="Ubuntu Light" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" text="Play">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Ubuntu Light" size="16.0" />
+               </font>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets top="150.0" />
+         </padding></VBox>
+   </right>
 </BorderPane>
