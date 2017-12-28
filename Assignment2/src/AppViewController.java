@@ -12,9 +12,7 @@ import yf3.audio.AudioManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
+import java.util.HashMap;
 
 public class AppViewController {
 
@@ -24,6 +22,7 @@ public class AppViewController {
 
     private AudioManager trackOneManager;
     private AudioManager trackTwoManager;
+    private AudioManager trackTogetherManager;
 
     @FXML
     private ChoiceBox<String> trackChooser;
@@ -48,10 +47,12 @@ public class AppViewController {
     @FXML
     private Button playTogetherBtn;
 
+    private HashMap<String, AudioManager> trackMap;
+
     @FXML
     private void initialize() {
-        trackOneManager = new AudioManager(trackOneName);
-        trackTwoManager = new AudioManager(trackTwoName);
+        trackOneManager = new AudioManager();
+        trackTwoManager = new AudioManager();
 
         ObservableList<String> trackList = FXCollections.observableArrayList(trackOneName, trackTwoName);
         pitchLevelChooser.setItems(FXCollections.observableArrayList("2", "4"));
@@ -65,6 +66,10 @@ public class AppViewController {
 
         fourierFrequencyChooser.setItems(FXCollections.observableArrayList(0, 100, 200, 500, 800));
         fourierFrequencyChooser.getSelectionModel().selectFirst();
+
+        trackMap = new HashMap<>();
+        trackMap.put(trackOneName, trackOneManager);
+        trackMap.put(trackTwoName, trackTwoManager);
     }
 
     @FXML
@@ -93,23 +98,19 @@ public class AppViewController {
 
     @FXML
     public void onSaveClicked() {
+        AudioManager target = trackMap.get(trackChooser.getValue());
+        try {
+            target.buildAudioData(trackContent.getText());
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
         if (trackChooser.getValue().equals(trackOneName)) {
-            try {
-                trackOneManager.buildAudioData(trackContent.getText());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             playTrackOneBtn.setDisable(false);
-            // showTrackOneBtn.setDisable(false);
         }
         else if (trackChooser.getValue().equals(trackTwoName)) {
-            try {
-                trackTwoManager.buildAudioData(trackContent.getText());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             playTrackTwoBtn.setDisable(false);
-            // showTrackTwoBtn.setDisable(false);
         }
     }
 
@@ -127,6 +128,19 @@ public class AppViewController {
         trackTwoManager.dataToWav(wavPath);
         AudioClip audioClip = new AudioClip(new File(wavPath).toURI().toString());
         audioClip.play();
+    }
+
+    @FXML
+    public void onPlayTogetherClicked() {
+        AudioManager delayedVersion = new AudioManager(trackMap.get(delayedTrackChooser.getValue()));
+        int delaySeconds = Integer.parseInt(delayInputField.getText());
+        try {
+            delayedVersion.getAudioByteData().addDelayInFront(delaySeconds);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 
 }

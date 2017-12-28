@@ -4,14 +4,21 @@ import java.io.IOException;
 
 public class AudioManager {
 
-    private String audioName;
     private AudioByteData audioByteData;
     private boolean isDataBuilt;
 
-    public AudioManager(String name) {
-        audioName = name;
+    public AudioManager() {
         audioByteData = new AudioByteData();
         isDataBuilt = false;
+    }
+
+    public AudioManager(AudioManager other) {
+        this.audioByteData = new AudioByteData(other.getAudioByteData().getData());
+        this.isDataBuilt = other.isDataBuilt;
+    }
+
+    public AudioByteData getAudioByteData() {
+        return audioByteData;
     }
 
     public void buildAudioData(String input) throws IOException {
@@ -19,22 +26,9 @@ public class AudioManager {
         isDataBuilt = true;
     }
 
-    public void setAudioData(byte[] audioData) {
-        audioByteData = new AudioByteData(audioData);
-    }
-
     public void dataToWav(String outputPath) {
         try {
             audioByteData.produceWAV(outputPath);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    void addDelayInFront(int delaySeconds) {
-        try {
-            audioByteData.addDelayInFront(delaySeconds);
         }
         catch (IOException e) {
             e.printStackTrace();

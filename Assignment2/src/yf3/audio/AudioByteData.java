@@ -22,7 +22,7 @@ public class AudioByteData {
     }
 
     AudioByteData(byte[] otherData) {
-        this.data = otherData;
+        this.data = otherData.clone();
         this.fourierModulatorFrequency = DISABLED_FREQUENCY;
     }
 
@@ -66,16 +66,6 @@ public class AudioByteData {
         return noteData;
     }
 
-    void addDelayInFront(int delaySeconds) throws IOException {
-        if (delaySeconds == 0) return;
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        int delaySize = BYTES_PER_FRAME * delaySeconds * SAMPLE_FREQUENCY;
-        byte[] delay = new byte[delaySize];
-        outputStream.write(delay);
-        outputStream.write(data);
-        data = outputStream.toByteArray();
-    }
-
     void produceWAV(String outputPath) throws IOException {
         AudioFormat format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, SAMPLE_FREQUENCY,
                 BYTES_PER_FRAME * 8,1, BYTES_PER_FRAME, SAMPLE_FREQUENCY, false);
@@ -88,11 +78,11 @@ public class AudioByteData {
         AudioFormat format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, SAMPLE_FREQUENCY,
                 BYTES_PER_FRAME * 8,1, BYTES_PER_FRAME, SAMPLE_FREQUENCY, false);
         ByteArrayInputStream inputStream = new ByteArrayInputStream(audioData);
-        AudioInputStream ais = new AudioInputStream(inputStream, format, data.length/format.getFrameSize());
+        AudioInputStream audioInputStream = new AudioInputStream(inputStream, format, data.length/format.getFrameSize());
         Clip clip = null;
         try {
             clip = AudioSystem.getClip();
-            clip.open(ais);
+            clip.open(audioInputStream);
             clip.start();
         }
         catch (Exception e) {
@@ -105,5 +95,39 @@ public class AudioByteData {
             }
         }
     }
-    
+
+    public void addDelayInFront(int delaySeconds) throws IOException {
+        if (delaySeconds == 0) return;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        int delaySize = BYTES_PER_FRAME * delaySeconds * SAMPLE_FREQUENCY;
+        byte[] delay = new byte[delaySize];
+        outputStream.write(delay);
+        outputStream.write(data);
+        data = outputStream.toByteArray();
+    }
+
+    public void paddingAtEnd(int longLength) throws IOException {
+        ByteArrayOutputStream resultStream = new ByteArrayOutputStream();
+        byte[] newPart = new byte[longLength - data.length];
+        resultStream.write(data);
+        resultStream.write(newPart);
+        data = resultStream.toByteArray();
+    }
+
+    public static AudioByteData addData(AudioByteData data1, AudioByteData data2) {
+        byte[] resultData = new byte[data1.getDataLength()];
+        for (int i = 0; i < resultData.length; ++i) {
+            resultData[i] = (byte) (data1.getData()[i] + data2.getData()[i]);
+        }
+        return new AudioByteData(resultData);
+    }
+
+    byte[] getData() {
+        return data;
+    }
+
+    int getDataLength() {
+        return data.length;
+    }
+
 }
