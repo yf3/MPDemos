@@ -21,6 +21,10 @@ public class AudioManager {
         return audioByteData;
     }
 
+    public void setAudioByteData(AudioByteData otherData) {
+        this.audioByteData = new AudioByteData(otherData.getData());
+    }
+
     public void buildAudioData(String input) throws IOException {
         audioByteData.buildData(NotationInterpreter.retrieveNoteList(input));
         isDataBuilt = true;

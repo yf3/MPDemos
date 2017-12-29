@@ -199,7 +199,7 @@
                   </Label>
                </children>
             </HBox>
-            <Button fx:id="playTogetherBtn" disable="true" mnemonicParsing="false" text="Play">
+            <Button fx:id="playTogetherBtn" mnemonicParsing="false" onMouseClicked="#onPlayTogetherClicked" text="Play">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>

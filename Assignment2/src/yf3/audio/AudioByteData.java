@@ -126,7 +126,7 @@ public class AudioByteData {
         return data;
     }
 
-    int getDataLength() {
+    public int getDataLength() {
         return data.length;
     }
 

@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Rectangle;
+import yf3.audio.AudioByteData;
 import yf3.audio.AudioManager;
 
 import java.io.File;
@@ -53,6 +54,7 @@ public class AppViewController {
     private void initialize() {
         trackOneManager = new AudioManager();
         trackTwoManager = new AudioManager();
+        trackTogetherManager = new AudioManager();
 
         ObservableList<String> trackList = FXCollections.observableArrayList(trackOneName, trackTwoName);
         pitchLevelChooser.setItems(FXCollections.observableArrayList("2", "4"));
@@ -131,16 +133,29 @@ public class AppViewController {
     }
 
     @FXML
-    public void onPlayTogetherClicked() {
+    public void onPlayTogetherClicked() throws IOException {
         AudioManager delayedVersion = new AudioManager(trackMap.get(delayedTrackChooser.getValue()));
         int delaySeconds = Integer.parseInt(delayInputField.getText());
-        try {
-            delayedVersion.getAudioByteData().addDelayInFront(delaySeconds);
+        delayedVersion.getAudioByteData().addDelayInFront(delaySeconds);
+
+        AudioManager undelayedOne = new AudioManager(
+                (delayedTrackChooser.getValue().equals(trackTwoName)) ? trackMap.get(trackOneName) : trackMap.get(trackTwoName)
+        );
+
+        if (undelayedOne.getAudioByteData().getDataLength() > delayedVersion.getAudioByteData().getDataLength()) {
+            delayedVersion.getAudioByteData().paddingAtEnd(undelayedOne.getAudioByteData().getDataLength());
         }
-        catch (IOException e) {
-            e.printStackTrace();
+        else {
+            undelayedOne.getAudioByteData().paddingAtEnd(delayedVersion.getAudioByteData().getDataLength());
         }
-        
+
+        AudioByteData togetherData = AudioByteData.addData(delayedVersion.getAudioByteData(), undelayedOne.getAudioByteData());
+        trackTogetherManager.setAudioByteData(togetherData);
+
+        String wavPath = "./" + "Together.wav";
+        trackTogetherManager.dataToWav(wavPath);
+        AudioClip audioClip = new AudioClip(new File(wavPath).toURI().toString());
+        audioClip.play();
     }
 
 }
