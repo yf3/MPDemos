@@ -25,7 +25,8 @@ public class AudioManager {
         this.audioByteData = new AudioByteData(otherData.getData());
     }
 
-    public void buildAudioData(String input) throws IOException {
+    public void buildAudioData(String input, int fourierFrequency) throws IOException {
+        audioByteData.setFourierModulatorFrequency(fourierFrequency);
         audioByteData.buildData(NotationInterpreter.retrieveNoteList(input));
         isDataBuilt = true;
     }

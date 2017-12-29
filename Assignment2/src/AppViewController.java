@@ -102,7 +102,7 @@ public class AppViewController {
     public void onSaveClicked() {
         AudioManager target = trackMap.get(trackChooser.getValue());
         try {
-            target.buildAudioData(trackContent.getText());
+            target.buildAudioData(trackContent.getText(), fourierFrequencyChooser.getValue());
         }
         catch (IOException e) {
             e.printStackTrace();

@@ -26,7 +26,7 @@ public class AudioByteData {
         this.fourierModulatorFrequency = DISABLED_FREQUENCY;
     }
 
-    public void setFourierModulatorFrequency(int frequency) {
+    void setFourierModulatorFrequency(int frequency) {
         fourierModulatorFrequency = frequency;
     }
 
