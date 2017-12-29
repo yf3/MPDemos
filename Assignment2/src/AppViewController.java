@@ -57,8 +57,8 @@ public class AppViewController {
         trackTogetherManager = new AudioManager();
 
         ObservableList<String> trackList = FXCollections.observableArrayList(trackOneName, trackTwoName);
-        pitchLevelChooser.setItems(FXCollections.observableArrayList("2", "4"));
-        pitchLevelChooser.getSelectionModel().selectLast();
+        pitchLevelChooser.setItems(FXCollections.observableArrayList("2", "4", "6"));
+        pitchLevelChooser.getSelectionModel().select("4");
 
         trackChooser.setItems(trackList);
         trackChooser.getSelectionModel().selectFirst();

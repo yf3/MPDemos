@@ -34,6 +34,18 @@ public class NotationInterpreter {
         FREQUENCY_MAP.put("A.4", 440);
         FREQUENCY_MAP.put("A#.4", 466);
         FREQUENCY_MAP.put("B.4", 494);
+        FREQUENCY_MAP.put("C.6", 1047);
+        FREQUENCY_MAP.put("C#.6", 1109);
+        FREQUENCY_MAP.put("D.6", 1175);
+        FREQUENCY_MAP.put("D#.6", 1245);
+        FREQUENCY_MAP.put("E.6", 1319);
+        FREQUENCY_MAP.put("F.6", 1397);
+        FREQUENCY_MAP.put("F#.6", 1475);
+        FREQUENCY_MAP.put("G.6", 1568);
+        FREQUENCY_MAP.put("G#.6", 1661);
+        FREQUENCY_MAP.put("A.6", 1760);
+        FREQUENCY_MAP.put("A#.6", 1865);
+        FREQUENCY_MAP.put("B.6", 1976);
     }
 
     static ArrayList<Note> retrieveNoteList(String input) {
