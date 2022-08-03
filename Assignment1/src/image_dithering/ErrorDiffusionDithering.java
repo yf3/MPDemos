@@ -6,7 +6,7 @@ import org.opencv.core.Scalar;
 
 abstract class ErrorDiffusionDithering implements ConvertingStrategy {
 
-    final static double BLACK_LIMIT = 127.0;
+    final static double BLACK_LIMIT = 240.0;
     final static double COLOR_WHITE = 255.0;
     final static double COLOR_BLACK = 0.0;
 

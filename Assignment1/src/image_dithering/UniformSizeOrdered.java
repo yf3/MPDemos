@@ -23,7 +23,7 @@ public class UniformSizeOrdered extends BayerMatrixDithering {
                 int x = i % bayerMatrixLength;
                 int y = j % bayerMatrixLength;
                 double levelValue = (bayerMatrix[x][y] + 1) * levelRange;
-                double result = (source.get(i, j)[0] > levelValue) ? COLOR_WHITE : COLOR_BLACK;
+                double result = (source.get(i, j)[0] > levelValue ? COLOR_WHITE : COLOR_BLACK);
                 output.put(i, j, result);
             }
         }

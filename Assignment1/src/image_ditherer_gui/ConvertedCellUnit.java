@@ -4,7 +4,6 @@ import image_dithering.ImageData;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
@@ -12,6 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import static image_ditherer_gui.ImprovedView.BUTTON_STYLE;
 
 class ConvertedCellUnit {
 
@@ -23,6 +24,7 @@ class ConvertedCellUnit {
     private Button buttonApply;
     private Button buttonExport;
     private boolean grayscaleSelected;
+    private static final String COMBO_BOX_STYLE = "-fx-font-size: 14px;";
 
     ConvertedCellUnit(ReadOnlyDoubleProperty tileWidthProperty, ReadOnlyDoubleProperty wrapperHeightProperty) {
         basePane = new BorderPane();
@@ -51,6 +53,10 @@ class ConvertedCellUnit {
         panel.setSpacing(20.0);
         bar.setAlignment(Pos.CENTER);
         bar.setSpacing(10.0);
+
+        buttonApply.setStyle(BUTTON_STYLE);
+        buttonExport.setStyle(BUTTON_STYLE);
+        strategyChooser.setStyle(COMBO_BOX_STYLE);
 
         setInteractionsDisable();
     }

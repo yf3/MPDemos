@@ -14,9 +14,11 @@
 
     2. Rest: an upper-case letter R
 
-- ## Flow of control
+- ## How it works
     1. Flow chart of converting user input to audio data:
     ![](https://github.com/yf3/MMS_Assignments/blob/master/Assignment2/figures/flowChartBigPictureTrans.png?raw=true)
+    
+    2. Flow chart of 
 
 ![](https://github.com/yf3/MMS_Assignments/blob/master/Assignment2/figures/Screenshot1.png?raw=true)
 

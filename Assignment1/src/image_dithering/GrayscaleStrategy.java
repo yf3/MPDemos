@@ -5,27 +5,25 @@ import org.opencv.core.Mat;
 
 abstract class GrayscaleStrategy implements ConvertingStrategy {
 
-    Mat result;
-
     @Override
     public Mat retrieveResult(Mat source) {
-        createMatrix(source);
-        fillPixels(source);
+        Mat result = createMatrix(source);
+        fillPixels(source, result);
         return result;
     }
 
-    private void createMatrix(Mat source) {
-        result = new Mat(source.rows(), source.cols(), CvType.CV_8UC1);
+    private Mat createMatrix(Mat source) {
+        return new Mat(source.rows(), source.cols(), CvType.CV_8UC1);
     }
 
-    private void fillPixels(Mat source) {
-        for (int i = 0; i < result.rows(); ++i) {
-            for (int j = 0; j < result.cols(); ++j) {
+    private void fillPixels(Mat source, Mat output) {
+        for (int i = 0; i < output.rows(); ++i) {
+            for (int j = 0; j < output.cols(); ++j) {
                 double red = source.get(i, j)[2];
                 double green = source.get(i, j)[1];
                 double blue = source.get(i, j)[0];
                 double grayscaleValue = getGrayscaleValue(red, green, blue);
-                result.put(i, j, grayscaleValue);
+                output.put(i, j, grayscaleValue);
             }
         }
     }

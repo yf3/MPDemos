@@ -6,7 +6,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -21,7 +20,6 @@ public class ImprovedView {
     private BorderPane originalCell;
     private ImageView originalImageView;
     private VBox originalPanel;
-    private Label panelTitle;
     private Button buttonImport;
     private ObservableList<ConvertedCellUnit> convertedCells;
 
@@ -29,19 +27,21 @@ public class ImprovedView {
     private static final int INIT_ROOT_LAYOUT_WIDTH = 1280;
     private static final int INIT_ROOT_LAYOUT_HEIGHT = 640;
     private static final int CELL_WIDTH = 360;
+    static final String BUTTON_STYLE = "-fx-text-fill: #333333;" +
+            "-fx-font-size: 14px;";
 
     public ImprovedView() {
         create();
         adjust();
         setContent();
         arrange();
+        setStyles();
     }
 
     private void create() {
         originalCell = new BorderPane();
         originalImageView = new ImageView();
         originalPanel = new VBox();
-        panelTitle = new Label();
         buttonImport = new Button();
         cellWrapper = new TilePane();
         convertedCells = FXCollections.observableArrayList();
@@ -88,6 +88,10 @@ public class ImprovedView {
         originalCell.setBottom(originalPanel);
 
         originalPanel.getChildren().addAll(buttonImport);
+    }
+
+    private void setStyles() {
+        buttonImport.setStyle(BUTTON_STYLE);
     }
 
     void setOriginalPreview(Image image) {
