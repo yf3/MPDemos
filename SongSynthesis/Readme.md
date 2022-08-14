@@ -1,4 +1,4 @@
- # Assignment2: Generating Sounds
+ # Song Synthesis Demo
 
 - ## Notation:
 
@@ -15,10 +15,9 @@
     2. Rest: an upper-case letter R
 
 - ## How it works
-    1. Flow chart of converting user input to audio data:
-    ![](https://github.com/yf3/MMS_Assignments/blob/master/Assignment2/figures/flowChartBigPictureTrans.png?raw=true)
+    Flow chart of converting user input to audio data:
+    ![](https://github.com/yf3/MPDemos/blob/master/SongSynthesis/figures/flowChartBigPictureTrans.png?raw=true)
     
-    2. Flow chart of 
 
-![](https://github.com/yf3/MMS_Assignments/blob/master/Assignment2/figures/Screenshot1.png?raw=true)
+![](https://github.com/yf3/MPDemos/blob/master/SongSynthesis/figures/Screenshot1.png?raw=true)
 
